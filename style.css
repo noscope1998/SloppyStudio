@@ -177,13 +177,44 @@ ul {
 
 .hero-banner-full {
     width: 100%;
-    border-radius: 30px;
-    overflow: hidden;
-    aspect-ratio: 21/9;
     position: relative;
-    background: #000;
+    background: transparent;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s;
+    display: flex;
+    /* Added to help with sizing */
+    overflow: hidden;
+    /* Prevent images from spilling out during transition */
+}
+
+.slider-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    border-radius: 30px;
+    /* Re-added radius to the slider itself */
+}
+
+.slider-img {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transform: scale(1.05);
+    transition:
+        opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 2.2s cubic-bezier(0.2, 0, 0.2, 1),
+        filter 1.8s ease;
+    z-index: 1;
+    filter: brightness(0.7) blur(4px);
+    will-change: opacity, transform, filter;
+}
+
+.slider-img.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+    filter: brightness(1) blur(0px);
 }
 
 .hero-banner-full:hover {
@@ -192,8 +223,7 @@ ul {
 
 .hero-bg-img-full {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
     transition: transform 0.5s;
 }
@@ -559,17 +589,14 @@ ul {
 
 .game-hero-banner {
     width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    aspect-ratio: 21/9;
     position: relative;
+    background: transparent;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .game-hero-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
 }
 
@@ -815,8 +842,7 @@ ul {
 
 .feature-image img {
     width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
+    height: auto;
     display: block;
     transition: transform 0.5s;
 }
@@ -888,7 +914,7 @@ ul {
     }
 
     .hero-banner-full {
-        aspect-ratio: 16/9;
+        height: auto;
     }
 
     .title-left h1 {
@@ -896,7 +922,7 @@ ul {
     }
 
     .game-hero-banner {
-        aspect-ratio: 16/9;
+        height: auto;
     }
 
     .title-right {

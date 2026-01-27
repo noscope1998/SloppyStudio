@@ -25,4 +25,19 @@ document.addEventListener('DOMContentLoaded', () => {
             header.style.boxShadow = 'none';
         }
     });
+
+    // Automatic Banner Slider
+    const sliderImages = document.querySelectorAll('.slider-img');
+    if (sliderImages.length > 0) {
+        let currentSlide = 0;
+        const slideInterval = 5000; // 5 seconds
+
+        function nextSlide() {
+            sliderImages[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % sliderImages.length;
+            sliderImages[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, slideInterval);
+    }
 });
