@@ -157,10 +157,38 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Pause auto-slide on hover or touch
-        testContainer.addEventListener('mouseenter', () => clearInterval(testInterval));
-        testContainer.addEventListener('mouseleave', startTestAuto);
-        testContainer.addEventListener('touchstart', () => clearInterval(testInterval));
+        // Mouse Drag to Scroll Logic
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        testContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            testContainer.style.cursor = 'grabbing';
+            startX = e.pageX - testContainer.offsetLeft;
+            scrollLeft = testContainer.scrollLeft;
+            clearInterval(testInterval);
+        });
+
+        testContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+            testContainer.style.cursor = 'grab';
+            startTestAuto();
+        });
+
+        testContainer.addEventListener('mouseup', () => {
+            isDown = false;
+            testContainer.style.cursor = 'grab';
+            startTestAuto();
+        });
+
+        testContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - testContainer.offsetLeft;
+            const walk = (x - startX) * 2; // Multiplier for faster scroll
+            testContainer.scrollLeft = scrollLeft - walk;
+        });
 
         startTestAuto();
     }

@@ -651,6 +651,8 @@ ul {
     /* Firefox */
     -ms-overflow-style: none;
     /* IE/Edge */
+    cursor: grab;
+    user-select: none;
 }
 
 /* Hide scrollbar for Chrome/Safari */
