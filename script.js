@@ -40,4 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setInterval(nextSlide, slideInterval);
     }
+
+    // Make Game Cards Clickable
+    document.querySelectorAll('.game-card:not(.coming-soon)').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            // If the user clicked a button or link specifically, let that happen (external store links)
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+                return;
+            }
+            // For the rest of the card, go to the internal detail page
+            const pageUrl = card.getAttribute('data-url');
+            if (pageUrl) {
+                window.location.href = pageUrl;
+            }
+        });
+    });
 });
