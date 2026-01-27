@@ -101,4 +101,67 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Testimonials Slider Logic (Scroll-based)
+    const testContainer = document.querySelector('.testimonials-slider-container');
+    const testCards = document.querySelectorAll('.testimonial-card');
+    const prevTestBtn = document.querySelector('.prev-test');
+    const nextTestBtn = document.querySelector('.next-test');
+
+    if (testContainer && testCards.length > 0) {
+        let testInterval;
+        const testAutoTime = 5000;
+
+        function getMoveAmount() {
+            const cardWidth = testCards[0].offsetWidth;
+            const gap = 30; // Matches CSS gap
+            return cardWidth + gap;
+        }
+
+        function scrollNext() {
+            const moveAmount = getMoveAmount();
+            const maxScroll = testContainer.scrollWidth - testContainer.clientWidth;
+
+            if (testContainer.scrollLeft >= maxScroll - 10) {
+                testContainer.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                testContainer.scrollBy({ left: moveAmount, behavior: 'smooth' });
+            }
+        }
+
+        function scrollPrev() {
+            const moveAmount = getMoveAmount();
+            if (testContainer.scrollLeft <= 10) {
+                testContainer.scrollTo({ left: testContainer.scrollWidth, behavior: 'smooth' });
+            } else {
+                testContainer.scrollBy({ left: -moveAmount, behavior: 'smooth' });
+            }
+        }
+
+        function startTestAuto() {
+            clearInterval(testInterval);
+            testInterval = setInterval(scrollNext, testAutoTime);
+        }
+
+        if (nextTestBtn) {
+            nextTestBtn.addEventListener('click', () => {
+                scrollNext();
+                startTestAuto();
+            });
+        }
+
+        if (prevTestBtn) {
+            prevTestBtn.addEventListener('click', () => {
+                scrollPrev();
+                startTestAuto();
+            });
+        }
+
+        // Pause auto-slide on hover or touch
+        testContainer.addEventListener('mouseenter', () => clearInterval(testInterval));
+        testContainer.addEventListener('mouseleave', startTestAuto);
+        testContainer.addEventListener('touchstart', () => clearInterval(testInterval));
+
+        startTestAuto();
+    }
 });
