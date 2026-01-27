@@ -169,67 +169,238 @@ ul {
     font-size: 0.9rem;
 }
 
-/* Hero Home */
+/* Hero Home & Slider */
 .hero-home {
-    padding: 40px 0;
+    padding: 30px 0;
     animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-banner-full {
     width: 100%;
     position: relative;
-    background: transparent;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s;
-    display: flex;
-    /* Added to help with sizing */
+    border-radius: 32px;
     overflow: hidden;
-    /* Prevent images from spilling out during transition */
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
 }
 
 .slider-container {
-    display: grid;
-    grid-template-columns: 1fr;
     width: 100%;
-    border-radius: 30px;
-    /* Re-added radius to the slider itself */
+    height: 520px;
+    /* Specific height for the banner */
+    position: relative;
 }
 
-.slider-img {
-    grid-area: 1 / 1;
+.slides-wrapper {
     width: 100%;
-    height: auto;
+    height: 100%;
+    position: relative;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    transform: scale(1.05);
-    transition:
-        opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 2.2s cubic-bezier(0.2, 0, 0.2, 1),
-        filter 1.8s ease;
+    visibility: hidden;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 1.2s;
     z-index: 1;
-    filter: brightness(0.7) blur(4px);
-    will-change: opacity, transform, filter;
 }
 
-.slider-img.active {
+.hero-slide.active {
     opacity: 1;
-    transform: scale(1);
+    visibility: visible;
     z-index: 2;
-    filter: brightness(1) blur(0px);
-}
-
-.hero-banner-full:hover {
-    transform: scale(1.01);
 }
 
 .hero-bg-img-full {
     width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: transform 8s linear;
 }
 
-.hero-banner-full:hover .hero-bg-img-full {
-    transform: scale(1.05);
+.hero-slide.active .hero-bg-img-full {
+    transform: scale(1);
+}
+
+.hero-slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+    /* Let clicks pass through to buttons inside */
+}
+
+.glass-box {
+    max-width: 480px;
+    padding: 24px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    pointer-events: auto;
+}
+
+.hero-slide.active .glass-box {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.slide-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #fff;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.slide-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+    max-width: 450px;
+}
+
+.slide-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* Updated Buttons for Slider */
+.btn-primary {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.5);
+    background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+/* Slider Navigation */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.slider-nav:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-nav svg {
+    width: 24px;
+    height: 24px;
+}
+
+.prev-btn {
+    left: 30px;
+}
+
+.next-btn {
+    right: 30px;
+}
+
+/* Slider Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    width: 30px;
+    background: #fff;
+}
+
+.dot:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+    .slider-container {
+        height: 600px;
+    }
+
+    .hero-slide-content {
+        padding: 30px;
+    }
+
+    .slide-title {
+        font-size: 2.2rem;
+    }
+
+    .glass-box {
+        padding: 25px;
+    }
+
+    .slider-nav {
+        display: none;
+        /* Hide arrows on mobile for cleaner look */
+    }
 }
 
 /* Games Section */

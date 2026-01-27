@@ -8,21 +8,10 @@
     <meta name="description"
         content="SloppyStudio is a premium creative digital agency specializing in web design, branding, and digital experiences.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SloppyStudio - Creative Digital Agency</title>
-        <meta name="description"
-            content="SloppyStudio is a premium creative digital agency specializing in web design, branding, and digital experiences.">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-    </head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
 
 <body>
     <div id="app">
@@ -45,11 +34,74 @@
             <section class="hero-home">
                 <div class="container">
                     <div class="hero-banner-full slider-container">
-                        <img src="image/Banner/Newton.png" alt="Newton's Playground"
-                            class="hero-bg-img-full slider-img active">
-                        <img src="image/Banner/Car Parking.png" alt="Car Parking Simulator"
-                            class="hero-bg-img-full slider-img">
-                        <img src="image/Banner/Ocean.png" alt="Oceanside Whispers" class="hero-bg-img-full slider-img">
+                        <div class="slides-wrapper">
+                            <!-- Slide 1: Newton's Playground -->
+                            <div class="hero-slide active">
+                                <img src="image/Banner/Newton.png" alt="Newton's Playground" class="hero-bg-img-full">
+                                <div class="hero-slide-content">
+                                    <div class="glass-box">
+                                        <h2 class="slide-title">Newton's Playground</h2>
+                                        <div class="slide-buttons">
+                                            <a href="https://www.meta.com/en-gb/experiences/newtons-playground-physics-sandbox/24802835455982621/"
+                                                target="_blank" class="btn btn-primary">EXPLORE GAME</a>
+                                            <a href="newton.html" class="btn btn-secondary">LEARN MORE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2: Car Parking Simulator -->
+                            <div class="hero-slide">
+                                <img src="image/Banner/Car Parking.png" alt="Car Parking Simulator"
+                                    class="hero-bg-img-full">
+                                <div class="hero-slide-content">
+                                    <div class="glass-box">
+                                        <h2 class="slide-title">Car Parking Simulator</h2>
+                                        <div class="slide-buttons">
+                                            <a href="https://store.steampowered.com/app/1324410/Car_Parking_Simulator_VR/"
+                                                target="_blank" class="btn btn-primary">EXPLORE GAME</a>
+                                            <a href="parking.html" class="btn btn-secondary">LEARN MORE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3: Oceanside Whispers -->
+                            <div class="hero-slide">
+                                <img src="image/Banner/Ocean.png" alt="Oceanside Whispers" class="hero-bg-img-full">
+                                <div class="hero-slide-content">
+                                    <div class="glass-box">
+                                        <h2 class="slide-title">Oceanside Whispers</h2>
+                                        <div class="slide-buttons">
+                                            <a href="https://store.steampowered.com/app/4108420/Oceanside_Whispers/"
+                                                target="_blank" class="btn btn-primary">EXPLORE GAME</a>
+                                            <a href="oceanside.html" class="btn btn-secondary">LEARN MORE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Arrows -->
+                        <button class="slider-nav prev-btn" aria-label="Previous Slide">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button class="slider-nav next-btn" aria-label="Next Slide">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+
+                        <!-- Pagination Dots -->
+                        <div class="slider-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
                     </div>
                 </div>
             </section>

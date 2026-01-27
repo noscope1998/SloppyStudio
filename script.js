@@ -26,19 +26,64 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Automatic Banner Slider
-    const sliderImages = document.querySelectorAll('.slider-img');
-    if (sliderImages.length > 0) {
-        let currentSlide = 0;
-        const slideInterval = 5000; // 5 seconds
+    // Enhanced Banner Slider
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
 
-        function nextSlide() {
-            sliderImages[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % sliderImages.length;
-            sliderImages[currentSlide].classList.add('active');
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        let slideInterval;
+        const intervalTime = 6000;
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+
+            currentSlide = (index + slides.length) % slides.length;
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
         }
 
-        setInterval(nextSlide, slideInterval);
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function startAutoSlide() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, intervalTime);
+        }
+
+        // Event Listeners for Nav
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                startAutoSlide();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                startAutoSlide();
+            });
+        }
+
+        // Event Listeners for Dots
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+                showSlide(idx);
+                startAutoSlide();
+            });
+        });
+
+        startAutoSlide();
     }
 
     // Make Game Cards Clickable
