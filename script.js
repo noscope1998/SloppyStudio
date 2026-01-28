@@ -192,4 +192,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         startTestAuto();
     }
+
+    // Contact Form Handling
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = contactForm.querySelector('.btn-gradient-submit');
+            const originalText = submitBtn.innerText;
+
+            submitBtn.innerText = 'Sending...';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                submitBtn.innerText = 'Message Sent!';
+                submitBtn.style.background = 'linear-gradient(135deg, #22c55e 0%, #10b981 100%)';
+                contactForm.reset();
+
+                setTimeout(() => {
+                    submitBtn.innerText = originalText;
+                    submitBtn.style.background = 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)';
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                }, 3000);
+            }, 1500);
+        });
+    }
 });
