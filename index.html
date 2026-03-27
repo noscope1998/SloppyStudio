@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
@@ -20,6 +20,9 @@
             <div class="container">
                 <a href="index.html" class="logo">SLOPPY STUDIO</a>
                 <nav class="nav">
+                    <button class="nav-toggle" aria-label="Toggle navigation">
+                        <span class="hamburger"></span>
+                    </button>
                     <ul class="nav-list">
                         <li><a href="index.html" class="nav-link">Home</a></li>
                         <li><a href="#games" class="nav-link">Our Games</a></li>
@@ -32,9 +35,8 @@
         <main>
             <!-- Hero Section -->
             <section class="hero-home">
-                <div class="container">
-                    <div class="hero-banner-full slider-container">
-                        <div class="slides-wrapper">
+                <div class="hero-banner-full slider-container">
+                    <div class="slides-wrapper">
                             <!-- Slide 1: Newton's Playground -->
                             <div class="hero-slide active">
                                 <img src="image/Banner/Newton.png" alt="Newton's Playground" class="hero-bg-img-full">
