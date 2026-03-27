@@ -66,20 +66,25 @@ html {
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden !important; /* Force no horizontal scroll */
+    background-color: var(--bg-outer);
+}
+
 body {
     font-family: var(--font-main);
-    background-color: var(--bg-outer);
     color: var(--text-color);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
 }
 
 #app {
     background-color: var(--bg-inner);
     width: 100%;
+    max-width: 100% !important;
     margin: 0;
     min-height: 100vh;
     animation: fadeIn 0.6s ease-out;
@@ -133,9 +138,10 @@ ul {
     font-size: 1.5rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #fff;
+    color: #fff !important;
     transition: transform 0.3s;
     z-index: 1002;
+    position: relative;
 }
 
 .nav-list {
@@ -223,42 +229,36 @@ ul {
 
 /* Hero Home & Slider */
 .hero-home {
-    padding: 30px 0;
-    animation: fadeInUp 0.8s ease-out;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .hero-banner-full {
     width: 100%;
     position: relative;
-    border-radius: 0; /* Full width means no rounded corners on banner edges */
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.4);
-}
-
-@media (min-width: 1024px) {
-    .hero-banner-full {
-        border-radius: 0;
-    }
 }
 
 .slider-container {
-    width: 100vw;
-    margin-left: calc(-1 * 5%); /* Negative margin to pull back the container outside .container's padding */
+    width: 100%;
+    margin: 0;
     aspect-ratio: 21 / 9;
     position: relative;
-}
-
-@media (min-width: 1440px) {
-    .slider-container {
-        margin-left: -80px; 
-    }
+    overflow: hidden;
 }
 
 @media (max-width: 1024px) {
     .slider-container {
-        width: 100%;
-        margin-left: 0;
         aspect-ratio: 16 / 9;
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-container {
+        aspect-ratio: 4 / 5;
     }
 }
 
@@ -1644,13 +1644,19 @@ ul {
 
 @media (max-width: 1024px) {
     .nav-toggle {
-        display: block; /* Hamburger becomes visible */
+        display: block !important; /* Force visibility */
+        background: transparent;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1002;
     }
 
     .nav-list {
+        display: flex !important;
         position: fixed;
         top: 0;
-        right: -100%; /* Hidden by default */
+        right: -100%;
         width: 100%;
         height: 100vh;
         background: var(--bg-outer);
@@ -1658,23 +1664,17 @@ ul {
         justify-content: center;
         align-items: center;
         transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 1001; /* Above sticky header content but below toggle */
+        z-index: 1001;
         gap: 40px;
         padding: 80px 40px;
+        pointer-events: none;
+        opacity: 0;
     }
 
     .nav-list.active {
-        right: 0; /* Sliding in when active */
-    }
-
-    .nav-link {
-        font-size: 2rem;
-        font-weight: 700;
-    }
-    
-    .studio-content-wrapper {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        right: 0;
+        pointer-events: auto;
+        opacity: 1;
     }
 }
 
