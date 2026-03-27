@@ -66,6 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             slides[currentSlide].classList.add('active');
             dots[currentSlide].classList.add('active');
+
+            // Sliding movement
+            const offset = -currentSlide * 100;
+            slides.forEach(slide => {
+                slide.style.transform = `translateX(${offset}%)`;
+            });
         }
 
         function nextSlide() {

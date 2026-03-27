@@ -92,7 +92,6 @@ body {
 
 .container {
     width: 100%;
-    max-width: 100%;
     margin: 0 auto;
     padding: 0 5%;
 }
@@ -245,9 +244,9 @@ ul {
 .slider-container {
     width: 100%;
     margin: 0;
-    aspect-ratio: 21 / 9;
     position: relative;
     overflow: hidden;
+    border-radius: 32px;
 }
 
 @media (max-width: 1024px) {
@@ -267,42 +266,30 @@ ul {
 .slides-wrapper {
     width: 100%;
     height: 100%;
+    overflow: hidden;
     position: relative;
+    display: flex; /* Horizontal container for slides */
 }
 
 .hero-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    min-width: 100%;
     height: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-        visibility 1.2s;
+    position: relative;
+    transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     z-index: 1;
+    overflow: hidden;
 }
 
+/* Sliding active state management via track transform in JS */
 .hero-slide.active {
-    opacity: 1;
-    visibility: visible;
     z-index: 2;
 }
 
-.hero-bg-img-full {
+.hero-slide .hero-bg-img-full {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.1);
-}
-
-.hero-slide.active .hero-bg-img-full {
-    animation: kenBurns 8s linear infinite alternate;
-}
-
-@keyframes kenBurns {
-    0% { transform: scale(1.15); }
-    100% { transform: scale(1); }
+    height: auto;
+    display: block;
+    z-index: 1;
 }
 
 .hero-slide-content {
@@ -310,26 +297,26 @@ ul {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 40px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+    z-index: 2;
+    padding: 2rem;
     display: flex;
     align-items: flex-end;
     pointer-events: none;
-    /* Let clicks pass through to buttons inside */
 }
 
 .glass-box {
     max-width: 600px;
-    padding: 3rem;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 32px;
-    transform: translateY(20px);
+    border-radius: 24px;
+    transform: translateY(40px);
     opacity: 0;
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.4s;
     pointer-events: auto;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
 }
 
 @media (max-width: 768px) {
@@ -1693,6 +1680,7 @@ ul {
 
     .logo {
         font-size: 1.2rem;
+        text-align: center;
     }
 
     /* Hero Slider Mobile Fixes */
